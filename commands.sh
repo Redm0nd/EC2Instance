@@ -1,0 +1,3 @@
+aws ec2 create-key-pair --key-name $Key --query KeyMaterial --output text > $Key.pem
+aws ec2 run-instances --image-id resolve:ssm:/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2 --instance-type t2.micro --key-name $Key --query 'Instances[*].InstanceId[]' --output text
+aws ec2 describe-instances --instance-id $InstanceId --query 'Reservations[*].Instances[*].PublicDnsName[]' --output text
